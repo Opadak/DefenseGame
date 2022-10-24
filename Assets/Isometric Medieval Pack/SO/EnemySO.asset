@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4786cd09308514858889ec18873b1bd5, type: 3}
+  m_Name: EnemySO
+  m_EditorClassIdentifier: 
+  enemies:
+  - name: nomal
+    curHp: 20
+    maxHp: 20
+    speed: 1
+    damage: 1
+    enemySprite: {fileID: -1272978575, guid: 9c8370c954ad94b55b260d061ed34314, type: 3}
+  - name: epic
+    curHp: 50
+    maxHp: 50
+    speed: 2
+    damage: 2
+    enemySprite: {fileID: 1696597259, guid: e70320cadf4104cad9cf1caf18d8f458, type: 3}
+  - name: devil
+    curHp: 80
+    maxHp: 80
+    speed: 3
+    damage: 3
+    enemySprite: {fileID: -1908875190, guid: 5b09ebb817c91463682f118966f06ba7, type: 3}
