@@ -11,6 +11,14 @@ public class EnemyA : Enemy
     private GameObject missilePrefab;
 
 
+    private float speed;
+    private int hp;
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -23,7 +31,16 @@ public class EnemyA : Enemy
         base.Update();
     }
 
-
+    protected override void init()
+    {
+        base.init();
+        EnemyStat enemyStat = new EnemyStat();
+        enemyStat.SetSpeed(2f);
+        enemyStat.SetHp(3);
+        speed = enemyStat.GetSpeed();
+        hp = enemyStat.GetHp();
+        Debug.Log(speed + "" + hp);
+    }
     protected override void Attack()
     {
        GameObject missile  =  Instantiate(missilePrefab);

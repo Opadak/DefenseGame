@@ -5,11 +5,15 @@ using DG.Tweening;
 
 public class Enemy : MonoBehaviour
 {
- 
-    [SerializeField]
-    private float speed;
-    [SerializeField]
-    private int hp;
+
+    
+
+
+
+    protected virtual void Awake()
+    {
+        init();
+    }
 
     protected virtual void Start()
     {
@@ -18,8 +22,11 @@ public class Enemy : MonoBehaviour
     }
     protected virtual void Update() { }
 
-
-    protected void TurnAround()
+    protected virtual void init()
+    {
+       
+    }
+    private void TurnAround()
     {
         float distanceX =  transform.position.x - Utils.playerPos.position.x;
         if( distanceX >= 0)
@@ -31,7 +38,7 @@ public class Enemy : MonoBehaviour
             transform.localEulerAngles = new Vector3(0, 0, 0);
         }
     }
-    protected void MoveToPlayer()
+    private void MoveToPlayer()
     {
 
         float distanceTime = speed * (Vector3.Distance(transform.position,Utils.playerPos.position));
@@ -57,10 +64,12 @@ public class Enemy : MonoBehaviour
         DOTween.Kill(transform);
         Destroy(gameObject);
 
-        //Enemy를 클릭해 잡을 시 GameManager "OnDisplayScore"메소드 사용하여 점수를 업해주기 
+        //Enemy?? ?????? ???? ?? GameManager "OnDisplayScore"?????? ???????? ?????? ???????? 
     }
     protected virtual void OnMouseUp()
     {
 
     }
+
+
 }
