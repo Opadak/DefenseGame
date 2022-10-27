@@ -20,7 +20,7 @@ public class EnemyA : Enemy
 
     protected override void Update()
     {
-        
+        base.Update();
     }
 
 
