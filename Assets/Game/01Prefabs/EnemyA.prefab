@@ -133,7 +133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f03f4ad875c9ba48848b0c17dfc76fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 3
+  hp: 0
   missilePos: {fileID: 8867268355983293883}
   missilePrefab: {fileID: 5997830519925788853, guid: 34af1eb250166ed4faa3cb49337b72ac, type: 3}
 --- !u!58 &1986980511241535227

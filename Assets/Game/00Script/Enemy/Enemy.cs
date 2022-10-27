@@ -8,7 +8,8 @@ public class Enemy : MonoBehaviour
  
     [SerializeField]
     private float speed;
-
+    [SerializeField]
+    private int hp;
 
     public virtual void Start()
     {
@@ -38,6 +39,7 @@ public class Enemy : MonoBehaviour
         float distanceTime = speed * (Vector3.Distance(transform.position,Utils.playerPos.position));
         transform.DOMove(Utils.playerPos.transform.position, distanceTime);
     }
+
     public virtual void Attack() { }
    
     private void OnTriggerEnter2D(Collider2D collision)
@@ -46,14 +48,20 @@ public class Enemy : MonoBehaviour
         {
             SpriteRenderer mesh = GetComponentInChildren<SpriteRenderer>();
             mesh.color = Color.red;
-            transform.DOKill();
+            
         }
     }
 
-    void OnMouseDown()
+    public virtual void OnMouseDown()
     {
         SpriteRenderer mesh = GetComponentInChildren<SpriteRenderer>();
         mesh.color = Color.black;
         Destroy(gameObject);
+
+        //Enemy를 클릭해 잡을 시 
+    }
+    public virtual void OnMouseUp()
+    {
+
     }
 }
