@@ -10,21 +10,21 @@ public class EnemyA : Enemy
     [SerializeField]
     private GameObject missilePrefab;
 
-    
-    public override void Start()
+
+    protected override void Start()
     {
         base.Start();
         StartCoroutine(AttackCo(0.4f));
     }
 
 
-    public override void Update()
+    protected override void Update()
     {
         
     }
 
 
-    public override void Attack()
+    protected override void Attack()
     {
        GameObject missile  =  Instantiate(missilePrefab);
        missile.transform.position = missilePos.position;

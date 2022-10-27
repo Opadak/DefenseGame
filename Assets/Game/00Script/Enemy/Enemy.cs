@@ -11,15 +11,15 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private int hp;
 
-    public virtual void Start()
+    protected virtual void Start()
     {
         TurnAround();
         MoveToPlayer();
     }
-    public virtual void Update() { }
-   
-  
-    void TurnAround()
+    protected virtual void Update() { }
+
+
+    protected void TurnAround()
     {
         float distanceX =  transform.position.x - Utils.playerPos.position.x;
         if( distanceX >= 0)
@@ -30,17 +30,15 @@ public class Enemy : MonoBehaviour
         {
             transform.localEulerAngles = new Vector3(0, 0, 0);
         }
-
-
     }
-    void MoveToPlayer()
+    protected void MoveToPlayer()
     {
 
         float distanceTime = speed * (Vector3.Distance(transform.position,Utils.playerPos.position));
         transform.DOMove(Utils.playerPos.transform.position, distanceTime);
     }
 
-    public virtual void Attack() { }
+    protected virtual void Attack() { }
    
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -52,15 +50,16 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public virtual void OnMouseDown()
+    protected virtual void OnMouseDown()
     {
         SpriteRenderer mesh = GetComponentInChildren<SpriteRenderer>();
         mesh.color = Color.black;
+        DOTween.Kill(transform);
         Destroy(gameObject);
 
-        //Enemy를 클릭해 잡을 시 
+        //Enemy를 클릭해 잡을 시 GameManager "OnDisplayScore"메소드 사용하여 점수를 업해주기 
     }
-    public virtual void OnMouseUp()
+    protected virtual void OnMouseUp()
     {
 
     }
