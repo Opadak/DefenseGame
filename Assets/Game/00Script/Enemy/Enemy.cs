@@ -6,8 +6,9 @@ using DG.Tweening;
 public class Enemy : MonoBehaviour
 {
 
-    
 
+    protected float speed;
+    protected int hp;
 
 
     protected virtual void Awake()
