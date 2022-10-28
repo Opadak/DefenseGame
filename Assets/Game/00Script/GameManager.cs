@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+
+
+public delegate void ScoreDelegate(int scorePlus);
+
+
 public class GameManager : MonoBehaviour, IGameManager
 {
     public static GameManager Inst { get; set; }
     void Awake() => Inst = this;
+
 
     [SerializeField]
     private TextMeshPro scoreTxt;
@@ -33,7 +39,7 @@ public class GameManager : MonoBehaviour, IGameManager
         SetUpLevelUp(0);
   
 
-        InvokeRepeating("RandomSpawnEnemy",2f,1f);
+        InvokeRepeating("RandomSpawnEnemy",3f,1f);
     }
     #region IGameManager
     public void ShowScoreToTextMesh(int scorePlus)

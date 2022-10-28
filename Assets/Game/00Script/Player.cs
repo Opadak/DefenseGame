@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class Player : MonoBehaviour
 {
 
@@ -27,9 +29,9 @@ public class Player : MonoBehaviour
     private void ControlLevel()
     {
         level++;
-        if(level >= 3)
+        if(level >= GameManager.Inst.myCastle.Count-1)
         {
-            level = 3;
+            level = GameManager.Inst.myCastle.Count-1;
         }
 
         GameManager.Inst.LevelUp(level);
@@ -38,4 +40,13 @@ public class Player : MonoBehaviour
     {
         ControlLevel();
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
+        {
+            hp--;
+        }
+    }
+
 }

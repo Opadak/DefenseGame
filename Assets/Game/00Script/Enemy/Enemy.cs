@@ -9,8 +9,8 @@ public class Enemy : MonoBehaviour
 
     protected float speed;
     protected int hp;
-    protected int damage;
- 
+    protected int point;
+    protected float delayMissile;
     protected virtual void Awake()
     {
         
@@ -19,9 +19,12 @@ public class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         TurnAround();
+       
+    }
+    protected virtual void Update() 
+    {
         MoveToPlayer();
     }
-    protected virtual void Update() { }
 
     protected virtual void init()
     {
@@ -43,27 +46,39 @@ public class Enemy : MonoBehaviour
     {
 
         float distanceTime = speed * (Vector3.Distance(transform.position,Utils.playerPos.position));
-        
-        transform?.DOMove(Utils.playerPos.transform.position, distanceTime);
+        transform.position = Vector3.MoveTowards(transform.position, Utils.playerPos.position, speed * Time.deltaTime);
+        /* transform?.DOMove(Utils.playerPos.transform.position, distanceTime);*/
     }
 
     protected virtual void Attack() { }
    
+    private IEnumerator AttackCo()
+    {
+        SpriteRenderer mesh = GetComponentInChildren<SpriteRenderer>();
+        mesh.color = Color.black;
+        yield return new WaitForSeconds(0.2f);
+        mesh.color = Color.white;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             SpriteRenderer mesh = GetComponentInChildren<SpriteRenderer>();
-            mesh.color = Color.red;
+            mesh.color = Color.yellow;
             
         }
     }
 
     protected virtual void OnMouseDown()
     {
-        SpriteRenderer mesh = GetComponentInChildren<SpriteRenderer>();
-        mesh.color = Color.black;
-       
+        ScoreDelegate scoreDelegate;
+        scoreDelegate = new ScoreDelegate(GameManager.Inst.ShowScoreToTextMesh);
+        scoreDelegate(point);
+        /*GameManager.Inst.ShowScoreToTextMesh(point);*/
+        StartCoroutine(AttackCo());
+        hp--;
+        if (hp <= 0)
+            Destroy(gameObject);
 
     }
     protected virtual void OnMouseUp()

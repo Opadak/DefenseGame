@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyB : Enemy
 {
+ 
+
     protected override void Awake()
     {
         base.Awake();
@@ -24,11 +26,24 @@ public class EnemyB : Enemy
     protected override void init()
     {
         base.init();
+        EnemyStat enemyStatB = new EnemyStat();
+        enemyStatB.Hp = 2;
+        enemyStatB.Speed = 0.8f;
+        enemyStatB.Point = 2;
 
+
+        speed = enemyStatB.Speed;
+        hp = enemyStatB.Hp;
+        point = enemyStatB.Point;
     }
 
-    protected new void MoveToPlayer()
+   
+    protected override void OnMouseDown()
     {
         
+        base.OnMouseDown();
+
     }
+
+    
 }

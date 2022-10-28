@@ -15,13 +15,28 @@ MonoBehaviour:
   castles:
   - level: 1
     hp: 10
-    castleSprite: {fileID: 21300000, guid: 09bc53a5f3f62da4c971e5f7b4e19534, type: 3}
+    castleSprite: {fileID: 21300000, guid: b2a5db7b8a261074697bcab223994745, type: 3}
   - level: 2
     hp: 20
-    castleSprite: {fileID: 21300000, guid: 19cfaf6a2dd5fdd439df9f20b6eb800b, type: 3}
+    castleSprite: {fileID: 21300000, guid: df7869db03d42b44fb6bd1adaa53ef4b, type: 3}
   - level: 3
     hp: 30
-    castleSprite: {fileID: 21300000, guid: 33f6cd4b845205e47beec87da4e8b983, type: 3}
+    castleSprite: {fileID: 21300000, guid: 7da0717147d4a004b98813f62bddab0e, type: 3}
   - level: 4
     hp: 40
-    castleSprite: {fileID: 21300000, guid: 0ff06c990fb6c0f4b90c1f11289afa2d, type: 3}
+    castleSprite: {fileID: 21300000, guid: e25bcc03f402f9e458e90e0ccd878b86, type: 3}
+  - level: 5
+    hp: 50
+    castleSprite: {fileID: 21300000, guid: 99f31672acac1784ab7a9679ee173b43, type: 3}
+  - level: 6
+    hp: 60
+    castleSprite: {fileID: 21300000, guid: f6a4c4630e0105942925845ba4189a1c, type: 3}
+  - level: 7
+    hp: 70
+    castleSprite: {fileID: 21300000, guid: ada1f5c773e153a45a36d6372b6a0df1, type: 3}
+  - level: 8
+    hp: 80
+    castleSprite: {fileID: 21300000, guid: 4733cf1ec6410564e8b0373a428b488c, type: 3}
+  - level: 9
+    hp: 90
+    castleSprite: {fileID: 21300000, guid: 2a9e19cb89a2aa444aca3a7031de6bf5, type: 3}

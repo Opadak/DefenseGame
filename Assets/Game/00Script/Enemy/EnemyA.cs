@@ -10,6 +10,7 @@ public class EnemyA : Enemy
     [SerializeField]
     private GameObject missilePrefab;
 
+    
     /*public event EventHandler Click;*/
     protected override void Awake()
     {
@@ -20,7 +21,7 @@ public class EnemyA : Enemy
     protected override void Start()
     {
         base.Start();
-        StartCoroutine(AttackCo(0.4f));
+        StartCoroutine(AttackCo(delayMissile));
     }
 
 
@@ -32,15 +33,16 @@ public class EnemyA : Enemy
     protected override void init()
     {
         base.init();
-        EnemyStat enemyStat = new EnemyStat();
-        enemyStat.Speed = 2f;
-        enemyStat.Hp = 3;
-        enemyStat.Damage = 1;
-   
-        speed = enemyStat.Speed;
-        hp = enemyStat.Hp;
-        damage = enemyStat.Damage;
- 
+        EnemyStat enemyStatA = new EnemyStat();
+        enemyStatA.Speed = 0.3f;
+        enemyStatA.Hp = 0;
+        enemyStatA.Point = 1;
+        enemyStatA.DelayMissile = 0.4f;
+
+        speed = enemyStatA.Speed;
+        hp = enemyStatA.Hp;
+        point = enemyStatA.Point;
+        delayMissile = enemyStatA.DelayMissile;
     }
 
     protected override void Attack()
@@ -49,16 +51,21 @@ public class EnemyA : Enemy
         missile.transform.position = missilePos.position;
         StartCoroutine(AttackCo(0.4f));
     }
+
+    protected override void MoveToPlayer()
+    {
+
+    }
     protected override void OnMouseDown()
     {
-        base.OnMouseDown();
-        GameManager.Inst.ShowScoreToTextMesh(damage);
+        
         //이걸 이벤트 핸들러로 바꾸고 싶음. 
-        Destroy(gameObject);
+        base.OnMouseDown();
+
     }
     IEnumerator AttackCo(float delayTime)
     {
-        int delayAttack = 0;
+        
         yield return new WaitForSeconds(delayTime);
         Attack();
     }
