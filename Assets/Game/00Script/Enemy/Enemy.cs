@@ -9,11 +9,11 @@ public class Enemy : MonoBehaviour
 
     protected float speed;
     protected int hp;
-
-
+    protected int damage;
+ 
     protected virtual void Awake()
     {
-        init();
+        
     }
 
     protected virtual void Start()
@@ -39,11 +39,12 @@ public class Enemy : MonoBehaviour
             transform.localEulerAngles = new Vector3(0, 0, 0);
         }
     }
-    private void MoveToPlayer()
+    protected virtual void MoveToPlayer()
     {
 
         float distanceTime = speed * (Vector3.Distance(transform.position,Utils.playerPos.position));
-        transform.DOMove(Utils.playerPos.transform.position, distanceTime);
+        
+        transform?.DOMove(Utils.playerPos.transform.position, distanceTime);
     }
 
     protected virtual void Attack() { }
@@ -62,14 +63,12 @@ public class Enemy : MonoBehaviour
     {
         SpriteRenderer mesh = GetComponentInChildren<SpriteRenderer>();
         mesh.color = Color.black;
-        DOTween.Kill(transform);
-        Destroy(gameObject);
+       
 
-        //Enemy?? ?????? ???? ?? GameManager "OnDisplayScore"?????? ???????? ?????? ???????? 
     }
     protected virtual void OnMouseUp()
     {
-
+       
     }
 
 

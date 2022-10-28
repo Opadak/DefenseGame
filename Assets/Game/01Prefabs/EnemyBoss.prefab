@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1696597259, guid: e70320cadf4104cad9cf1caf18d8f458, type: 3}
+  m_Sprite: {fileID: -1908875190, guid: 5b09ebb817c91463682f118966f06ba7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -93,12 +93,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1413331478694384031}
-  - component: {fileID: 5619646022581213649}
+  - component: {fileID: 7897607720465803188}
   - component: {fileID: 1986980511241535227}
   - component: {fileID: 9084921457096398111}
   - component: {fileID: 7277323479766982247}
   m_Layer: 0
-  m_Name: EnemyB
+  m_Name: EnemyBoss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,7 +113,7 @@ Transform:
   m_GameObject: {fileID: 90551437514168455}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 146815602253468611}
@@ -121,7 +121,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5619646022581213649
+--- !u!114 &7897607720465803188
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,9 +130,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 90551437514168455}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d2d296c65b8b2b4194224fdfc28fa20, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f03f4ad875c9ba48848b0c17dfc76fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missilePos: {fileID: 8867268355983293883}
+  missilePrefab: {fileID: 5997830519925788853, guid: 34af1eb250166ed4faa3cb49337b72ac, type: 3}
 --- !u!58 &1986980511241535227
 CircleCollider2D:
   m_ObjectHideFlags: 0

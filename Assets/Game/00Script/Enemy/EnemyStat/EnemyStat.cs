@@ -6,11 +6,16 @@ class EnemyStat
 {
     private float speed;
     private int hp;
+    private int damage;
 
-    public float GetSpeed() { return speed; }
-    public void SetSpeed(float _speed) { speed = _speed; }
+    public float Speed { get; set; }
 
-    public int GetHp() { return hp; }
-    public void SetHp(int _hp) { hp = _hp; }
+    public int Hp { get; set; }
 
+
+    public int Damage { get; set;}
+
+    
+
+    //두가지 경우에 대하여 언제 쓰는게 좋은지? 
 }

@@ -6,8 +6,9 @@ using UnityEngine;
 public class Castle
 {
     public int level;
-    
-
+    public int hp;
+    public Sprite castleSprite;
+    //레벨에 따른 scale 추가 
 }
 
 
@@ -17,3 +18,4 @@ public class CastleSO : ScriptableObject
     public Castle[] castles;
     
 }
+

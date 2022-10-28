@@ -12,4 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb070b87e0a9b04599c5fa95f5eacc2, type: 3}
   m_Name: CastleSO
   m_EditorClassIdentifier: 
-  castles: []
+  castles:
+  - level: 1
+    hp: 10
+    castleSprite: {fileID: 21300000, guid: 09bc53a5f3f62da4c971e5f7b4e19534, type: 3}
+  - level: 2
+    hp: 20
+    castleSprite: {fileID: 21300000, guid: 19cfaf6a2dd5fdd439df9f20b6eb800b, type: 3}
+  - level: 3
+    hp: 30
+    castleSprite: {fileID: 21300000, guid: 33f6cd4b845205e47beec87da4e8b983, type: 3}
+  - level: 4
+    hp: 40
+    castleSprite: {fileID: 21300000, guid: 0ff06c990fb6c0f4b90c1f11289afa2d, type: 3}

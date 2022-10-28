@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 7277323479766982247}
   m_Layer: 0
   m_Name: EnemyA
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,7 +113,7 @@ Transform:
   m_GameObject: {fileID: 90551437514168455}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 146815602253468611}
@@ -133,8 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f03f4ad875c9ba48848b0c17dfc76fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  hp: 0
   missilePos: {fileID: 8867268355983293883}
   missilePrefab: {fileID: 5997830519925788853, guid: 34af1eb250166ed4faa3cb49337b72ac, type: 3}
 --- !u!58 &1986980511241535227
