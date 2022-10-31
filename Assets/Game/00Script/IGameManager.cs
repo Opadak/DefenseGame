@@ -2,13 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-interface IGameManager 
+interface IGameManager
 {
-    /// <summary>
-    /// Score에 점수가 올라갈 때 마다 실행되는 함수 
-    /// </summary>
-    /// <param name="scorePlus">Score에 추가되는 점수</param>
-    void ShowScoreToTextMesh(int scorePlus);
+
     /// <summary>
     /// LevelUp이 되면 Castle의 정보가 바뀜.
     /// </summary>
@@ -29,6 +25,13 @@ interface IGameManager
     bool CheckCastleState(Player player);
 
     void EnemySpawn(Vector2 spawnVec, int enemyIndex);
+
+    /// <summary>
+    /// 플레이어가 죽었을 때 게임이 멈추고 게임 오버 패널이 나오게 하기. 
+    /// </summary>
+    /// <param name="isDie"></param>
+    void GameOver(bool isDie);
+
     
 }
 

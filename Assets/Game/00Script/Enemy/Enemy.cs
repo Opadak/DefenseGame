@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IfieldObject
 {
 
 
@@ -11,9 +11,10 @@ public class Enemy : MonoBehaviour
     protected int hp;
     protected int point;
     protected float delayMissile;
+    private SpriteRenderer spriteRender;
     protected virtual void Awake()
     {
-        
+      
     }
 
     protected virtual void Start()
@@ -28,7 +29,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void init()
     {
-       
+        spriteRender = GetComponentInChildren<SpriteRenderer>();
     }
     private void TurnAround()
     {
@@ -52,13 +53,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Attack() { }
    
-    private IEnumerator AttackCo()
-    {
-        SpriteRenderer mesh = GetComponentInChildren<SpriteRenderer>();
-        mesh.color = Color.black;
-        yield return new WaitForSeconds(0.2f);
-        mesh.color = Color.white;
-    }
+   
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -72,10 +67,10 @@ public class Enemy : MonoBehaviour
     protected virtual void OnMouseDown()
     {
         ScoreDelegate scoreDelegate;
-        scoreDelegate = new ScoreDelegate(GameManager.Inst.ShowScoreToTextMesh);
+        scoreDelegate = new ScoreDelegate(ScoreManager.Inst.PlusScore);
         scoreDelegate(point);
-        /*GameManager.Inst.ShowScoreToTextMesh(point);*/
-        StartCoroutine(AttackCo());
+        /*   ScoreManager.Instance.PlusScore(point);*/
+        ChangeSpriteRenderer(spriteRender, Color.black);
         hp--;
         if (hp <= 0)
             Destroy(gameObject);
@@ -83,8 +78,18 @@ public class Enemy : MonoBehaviour
     }
     protected virtual void OnMouseUp()
     {
+        ChangeSpriteRenderer(spriteRender, Color.white);
+    }
+
+    #region IfieldObject
+    public void ChangeSpriteRenderer(SpriteRenderer spriteRenderer, Color color)
+    {
+       
+            spriteRenderer.color = color;
        
     }
 
-
+  
+ 
+    #endregion
 }

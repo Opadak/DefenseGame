@@ -28,7 +28,7 @@ public class Boss : Enemy
     }
     protected override void init()
     {
-     
+        base.init();
         EnemyStat boss = new EnemyStat();
         boss.Speed = 0.1f;
         boss.Hp = 3;
