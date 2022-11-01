@@ -1,40 +1,44 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-
-public class Player : MonoBehaviour,IfieldObject
+public class Player : Singleton<Player>,IfieldObject
 {
+    [SerializeField]
+    GameObject shieldPrefab;
 
     private Castle castle;
 
-    private int level;
-    private int hp;
+    private  int level;
+    private  int hp;
+    private  int maxHP;
     public int Hp { get;  set; }
-    public int Level { get;  set; }
+
+    public int MaxHp { get; set; }
+    public  int Level { get;  set; }
 
     private Sprite castleSprite;
     private SpriteRenderer playerRenderer;
     private List<Castle> UiCastleList ;
    
     static float damageTime = 0.05f;
-    enum CastleState : int
-    {
-        VERY_GOOD,
-        GOOD,
-        NOT_BAD,
-        BAD
-    }
+
+    private StatusType status;
+    private StatusType statusType;
+
+
     private void Start()
     {
+        statusType = StatusType.VERY_GOOD;
         Init();
       
     }
     private void Init()
     {
        
-        UiCastleList = UIManager.Inst.myCastle;
+        UiCastleList = UIManager.Instance.myCastle;
         playerRenderer = GetComponent<SpriteRenderer>();
     }
    
@@ -42,9 +46,9 @@ public class Player : MonoBehaviour,IfieldObject
     {
         this.castle = castle;
         level = castle.level;
-        hp = castle.hp;
+        MaxHp = castle.hp;
+        Hp = castle.hp;
         castleSprite = castle.castleSprite;
-        Hp = hp;
         Level = level;
     }
     private void ControlLevel()
@@ -53,14 +57,12 @@ public class Player : MonoBehaviour,IfieldObject
         if(level >= UiCastleList.Count-1)
         {
             level = UiCastleList.Count-1;
+            return;
         }
 
-        UIManager.Inst.LevelUp(level);
+        UIManager.Instance.LevelUp(level);
     }
-    public void Btn()
-    {
-        ControlLevel();
-    }
+    
 
     #region IfieldObject
     public void ChangeSpriteRenderer(SpriteRenderer spriteRenderer, Color color)
@@ -81,14 +83,59 @@ public class Player : MonoBehaviour,IfieldObject
         if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyMissile"|| collision.gameObject.tag == "BossMissile")
         {
 
-            Hp--;
+            Hp = Hp - 1;
+            if (Hp <= 0)
+                return;
+            status = CheckHpState();
+            if(statusType != status)
+            {
+                statusType = status;
+                StatusEventManager.Instance.DispatchEvent(this, status);
+            }
+          
             ChangeSpriteRenderer(playerRenderer, Color.red);
             Invoke("InvokeChangeSpriteRender", damageTime);
         }
        
     }
 
+    public StatusType CheckHpState()
+    {
+        MaxHp = UIManager.Instance.myCastleMaxHp[level];
+        if (Hp >= MaxHp * 0.8f)
+        {        
+            return StatusType.VERY_GOOD;
+        } else if (Hp >= MaxHp * 0.6f)
+        {      
+            return StatusType.GOOD;
+        }
+        else if (Hp >= MaxHp * 0.4f)
+        {     
+            return StatusType.BAD;
+        }
+        else if (Hp >= 0)
+        { 
+            return StatusType.VERY_BAD;
+        }
+        else
+        {
+        
+            return StatusType.DEAD;
+        }
 
+    }
 
    
+
+    public void UpgradeBtn()
+    {
+        ControlLevel();
+    }
+
+
+    public void ShieldBtn()
+    {
+       /* shieldPrefab.SetActive(true);*/
+    }
+
 }

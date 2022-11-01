@@ -18,7 +18,7 @@ public class Boss : Enemy
     protected override void Start()
     {
         base.Start();
-        InvokeRepeating("Attack", 3f, 1);
+        InvokeRepeating("Attack", 3.5f, 1);
     }
 
 

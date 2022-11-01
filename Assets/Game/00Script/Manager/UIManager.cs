@@ -1,11 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
-    public static UIManager Inst { get; set; }
-    void Awake() => Inst = this;
 
     [SerializeField]
     private Player player;
@@ -18,19 +17,27 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private TextMeshPro HpTxt;
     [SerializeField]
+    private TextMeshPro MyStatusTxt;
+    [SerializeField]
     private CastleSO castleSO;
 
     public List<Castle> myCastle;
+    public List<int> myCastleMaxHp;
     static float damageTime = 0.05f;
-    private Coroutine checkPlayerStatCo = null; // level, hp 가 update되는 것을 체크 해주는 함수 
+    private Coroutine checkPlayerStatCo = null; // level, hp 가 update되는 것을 체크 해주는 함수
+                                         
+
+    private StatusType statusType;
     void Start()
     {
-
+        StatusEventManager.Instance.SendEvent -= StatusEventManager_SendEvent;
+        StatusEventManager.Instance.SendEvent += StatusEventManager_SendEvent;
         SetupCastleStat();
         SetUpLevelUp(0);
-        checkPlayerStatCo = StartCoroutine(checkPlayerStat());
-    }
+        checkPlayerStatCo = StartCoroutine(checkPlayerStat());s
 
+    }
+  
     private void SetUpLevelUp(int level)
     {
         LevelTxt.text = "Level " + myCastle[level].level;
@@ -43,7 +50,7 @@ public class UIManager : MonoBehaviour
     public void LevelUp(int level)
     {
         player.Setup(myCastle[level]);
-        UIManager.Inst.SetUpLevelUp(level);
+        UIManager.Instance.SetUpLevelUp(level);
     }
     private void SetupCastleStat()
     {
@@ -52,10 +59,10 @@ public class UIManager : MonoBehaviour
         {
             Castle castle = castleSO.castles[i];
             myCastle.Add(castle);
+            myCastleMaxHp.Add(castle.hp);
         }
 
     }
-
 
     IEnumerator checkPlayerStat()
     { 
@@ -79,19 +86,59 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void ReceivePlayerStatus(StatusType statusType)
+    {
+        ChangeUiText(ref MyStatusTxt, statusType);
+    
+        switch (statusType)
+        {
+            case StatusType.VERY_GOOD:
 
- 
-    private void ChangeUiText(ref TextMeshPro textMesh, int result )
+                break;
+            case StatusType.GOOD:
+              
+                break;
+            case StatusType.BAD:
+                Camera.main.backgroundColor = Color.yellow;
+                break;
+            case StatusType.VERY_BAD:
+                Camera.main.backgroundColor = Color.red;
+                MyStatusTxt.GetComponent<TextMeshPro>().color = Color.black;
+                break;
+            case StatusType.DEAD:
+                Camera.main.backgroundColor = Color.black;
+                MyStatusTxt.GetComponent<TextMeshPro>().color = Color.white;
+                break;
+
+        }
+    }
+
+    private void ChangeUiText(ref TextMeshPro textMesh, object result )
     {
         textMesh.text = textMesh.name + result;
     }
-    private void OnDestroy()
+    private void ChangeUiText(ref TextMeshPro textMesh, StatusType result)
+    {
+        textMesh.text = result.ToString();
+    }
+    protected override void OnDestroy()
     {
         if (checkPlayerStatCo != null)
         {
             StopCoroutine(checkPlayerStatCo);
             checkPlayerStatCo = null;
         }
+
+        StatusEventManager.Instance.SendEvent -= StatusEventManager_SendEvent;
+    
+    }
+
+    private void StatusEventManager_SendEvent(StatusType obj, EventArgs e)
+    {
+        ReceivePlayerStatus(obj);
+
+        Debug.Log(e.GetType());
+
 
     }
 }

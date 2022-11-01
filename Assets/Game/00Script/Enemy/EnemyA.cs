@@ -49,7 +49,7 @@ public class EnemyA : Enemy
     {
         GameObject missile = Instantiate(missilePrefab);
         missile.transform.position = missilePos.position;
-        StartCoroutine(AttackCo(0.4f));
+        StartCoroutine(AttackCo(1f));
     }
 
     protected override void MoveToPlayer()
