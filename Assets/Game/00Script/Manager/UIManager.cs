@@ -24,13 +24,13 @@ public class UIManager : Singleton<UIManager>
     public List<Castle> myCastle;
     public List<int> myCastleMaxHp;
     static float damageTime = 0.05f;
-    private Coroutine checkPlayerStatCo = null; // level, hp 가 update되는 것을 체크 해주는 함수
+    private Coroutine checkPlayerStatCo = null; // level, hp 가 update되는 것을 체크 해주는 코루틴
                                          
 
     private StatusType statusType;
     void Start()
     {
-        StatusEventManager.Instance.SendEvent -= StatusEventManager_SendEvent;
+        StatusEventManager.Instance.SendEvent -= StatusEventManager_SendEvent; //null값인지 물어보는 것이 좋음. 
         StatusEventManager.Instance.SendEvent += StatusEventManager_SendEvent;
         SetupCastleStat();
         SetUpLevelUp(0);
