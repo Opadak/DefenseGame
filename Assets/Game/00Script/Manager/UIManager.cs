@@ -34,7 +34,7 @@ public class UIManager : Singleton<UIManager>
         StatusEventManager.Instance.SendEvent += StatusEventManager_SendEvent;
         SetupCastleStat();
         SetUpLevelUp(0);
-        checkPlayerStatCo = StartCoroutine(checkPlayerStat());s
+        checkPlayerStatCo = StartCoroutine(checkPlayerStat());
 
     }
   

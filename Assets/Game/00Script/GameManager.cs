@@ -5,8 +5,6 @@ using TMPro;
 using UnityEngine.UI;
 
 
-
-
 public class GameManager : Singleton<GameManager>
 {
     public void GameOver(bool isDie)
