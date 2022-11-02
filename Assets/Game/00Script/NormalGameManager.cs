@@ -1,8 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Assets.Game._00Script
-{
+
     public class NormalGameManager
     {
         private static NormalGameManager listener = null;
@@ -27,4 +26,3 @@ namespace Assets.Game._00Script
         //굳이 monoBehavior을 상속하지 않고 GameObject상에 안 올려도 되기 때문에! 
         //한번 이걸 토대로 만들어보자 ㅇㅇ 
     }
-}

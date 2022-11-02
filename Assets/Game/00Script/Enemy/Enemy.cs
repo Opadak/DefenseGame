@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class Enemy : MonoBehaviour, IfieldObject
 {
@@ -16,6 +17,8 @@ public class Enemy : MonoBehaviour, IfieldObject
     {
       
     }
+
+
 
     protected virtual void Start()
     {
@@ -73,7 +76,14 @@ public class Enemy : MonoBehaviour, IfieldObject
         ChangeSpriteRenderer(spriteRender, Color.black);
         hp--;
         if (hp <= 0)
+        {
+            killEnemyDelegate killEnemyDelegate;
+            killEnemyDelegate = new killEnemyDelegate(SpawnManager.Instance.RecieveEnemyKill);
+            killEnemyDelegate(1);
+            SpawnManager.Instance.enemyOnField.Remove(gameObject);
             Destroy(gameObject);
+        }
+       
 
     }
     protected virtual void OnMouseUp()

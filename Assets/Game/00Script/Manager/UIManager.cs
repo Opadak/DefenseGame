@@ -20,24 +20,30 @@ public class UIManager : Singleton<UIManager>
     private TextMeshPro MyStatusTxt;
     [SerializeField]
     private CastleSO castleSO;
+    [SerializeField]
+    public GameObject clearPanel;
 
     public List<Castle> myCastle;
     public List<int> myCastleMaxHp;
     static float damageTime = 0.05f;
     private Coroutine checkPlayerStatCo = null; // level, hp 가 update되는 것을 체크 해주는 코루틴
-                                         
+    public int _hp;                                     
 
     private StatusType statusType;
+
+
     void Start()
     {
-        StatusEventManager.Instance.SendEvent -= StatusEventManager_SendEvent; //null값인지 물어보는 것이 좋음. 
+       
         StatusEventManager.Instance.SendEvent += StatusEventManager_SendEvent;
         SetupCastleStat();
         SetUpLevelUp(0);
         checkPlayerStatCo = StartCoroutine(checkPlayerStat());
 
     }
-  
+
+ 
+
     private void SetUpLevelUp(int level)
     {
         LevelTxt.text = "Level " + myCastle[level].level;
@@ -45,6 +51,7 @@ public class UIManager : Singleton<UIManager>
         playerSprite.sprite = myCastle[level].castleSprite;
         player.Level = myCastle[level].level;
         player.Hp = myCastle[level].hp;
+        StatusEventManager.Instance.DispatchEvent(this, StatusType.VERY_GOOD);
     }
 
     public void LevelUp(int level)
@@ -67,20 +74,20 @@ public class UIManager : Singleton<UIManager>
     IEnumerator checkPlayerStat()
     { 
         int _level = player.Level;
-        int _hp = player.Hp;
+        _hp = player.Hp;
         while (true)
         {
             if (_level != player.Level)
             {
                 _level = player.Level;
                
-                ChangeUiText( ref LevelTxt, _level);
+                ChangeUiText(LevelTxt, _level);
             }
             else if (_hp != player.Hp)
             {
               
                 _hp = player.Hp;
-                ChangeUiText(ref HpTxt, _hp);
+                ChangeUiText(HpTxt, _hp);
             }
             yield return new WaitForSeconds(damageTime);
         }
@@ -88,12 +95,13 @@ public class UIManager : Singleton<UIManager>
 
     private void ReceivePlayerStatus(StatusType statusType)
     {
-        ChangeUiText(ref MyStatusTxt, statusType);
+        ChangeUiText(MyStatusTxt, statusType);
     
         switch (statusType)
         {
             case StatusType.VERY_GOOD:
-
+                Camera.main.backgroundColor = Color.white;
+                MyStatusTxt.GetComponent<TextMeshPro>().color = Color.red;
                 break;
             case StatusType.GOOD:
               
@@ -108,16 +116,18 @@ public class UIManager : Singleton<UIManager>
             case StatusType.DEAD:
                 Camera.main.backgroundColor = Color.black;
                 MyStatusTxt.GetComponent<TextMeshPro>().color = Color.white;
+                GameManager.Instance.GameOver(true);
+                //게임 오버 
                 break;
 
         }
     }
 
-    private void ChangeUiText(ref TextMeshPro textMesh, object result )
+    private void ChangeUiText( TextMeshPro textMesh, object result )
     {
-        textMesh.text = textMesh.name + result;
+        textMesh.text = textMesh.name + " " + result;
     }
-    private void ChangeUiText(ref TextMeshPro textMesh, StatusType result)
+    private void ChangeUiText( TextMeshPro textMesh, StatusType result)
     {
         textMesh.text = result.ToString();
     }
@@ -128,9 +138,8 @@ public class UIManager : Singleton<UIManager>
             StopCoroutine(checkPlayerStatCo);
             checkPlayerStatCo = null;
         }
-
-        StatusEventManager.Instance.SendEvent -= StatusEventManager_SendEvent;
-    
+     /*   StatusEventManager.Instance.SendEvent -= StatusEventManager_SendEvent;*/
+        
     }
 
     private void StatusEventManager_SendEvent(StatusType obj, EventArgs e)
@@ -140,5 +149,11 @@ public class UIManager : Singleton<UIManager>
         Debug.Log(e.GetType());
 
 
+    }
+    public void NextStage()
+    {
+        clearPanel.SetActive(false);
+        StageManager.Instance.StartStage();
+        ChangeUiText(StageTxt,StageManager.Instance.Stage);
     }
 }

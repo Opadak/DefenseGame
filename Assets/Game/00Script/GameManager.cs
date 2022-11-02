@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 
 
-using Assets.Game._00Script;
+/*using Assets.Game._00Script;*/
 
 
 public class GameManager : Singleton<GameManager>

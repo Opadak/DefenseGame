@@ -20,8 +20,4 @@ public class StatusEventManager : Singleton<StatusEventManager>
             SendEvent(status, evt);
     }
 
-
-
- 
-
 }

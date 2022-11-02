@@ -18,7 +18,10 @@ public class Shield : MonoBehaviour
     {
         if (collision != null)
         {
-            Destroy(collision);
+
+            if (collision.gameObject.tag == "Player")
+                return;
+            Destroy(collision.gameObject);
             count--;
             if (count <= 0)
                 gameObject.SetActive(false);
