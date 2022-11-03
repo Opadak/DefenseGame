@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5997830519925788851}
   - component: {fileID: 5997830519925788850}
-  - component: {fileID: 1013979378587333985}
   - component: {fileID: 4864438645355782103}
+  - component: {fileID: 8228717070496332395}
   m_Layer: 0
   m_Name: MissileA
   m_TagString: EnemyMissile
@@ -86,18 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1013979378587333985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5997830519925788853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3020b7f03c339e41be56ea19d2d19c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &4864438645355782103
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -114,3 +102,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.49999997
+--- !u!114 &8228717070496332395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997830519925788853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d74c80eef8481c4abeb4839728f5390, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -22,7 +22,10 @@ public class UIManager : Singleton<UIManager>
     private CastleSO castleSO;
     [SerializeField]
     public GameObject clearPanel;
-
+    [SerializeField]
+    public GameObject gameOverPanel;
+    [SerializeField]
+    public GameObject playingPanel;
     public List<Castle> myCastle;
     public List<int> myCastleMaxHp;
     static float damageTime = 0.05f;

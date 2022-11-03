@@ -6,9 +6,7 @@ using TMPro;
 
 public class Player : Singleton<Player>,IfieldObject
 {
-    [SerializeField]
-    GameObject shieldPrefab;
-
+ 
     private Castle castle;
 
     private  int level;
@@ -22,9 +20,7 @@ public class Player : Singleton<Player>,IfieldObject
     private Sprite castleSprite;
     private SpriteRenderer playerRenderer;
     private List<Castle> UiCastleList ;
-   
     static float damageTime = 0.05f;
-
     private StatusType status;
     private StatusType statusType;
 

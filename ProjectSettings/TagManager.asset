@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - EnemyMissile
   - BossMissile
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX

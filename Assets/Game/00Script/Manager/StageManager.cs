@@ -20,8 +20,6 @@ public class StageManager : Singleton<StageManager>
     public StageEventHandler stageEvent;
     
 
- /*   private Coroutine checkStageClear = null;*/
-    //코루틴을 사용해서 가지고 오는 것이 좋은가? 
     protected override void Awake()
     {
         base.Awake();

@@ -10,6 +10,8 @@ public class Boss : Enemy
     private Transform missilePosL;
     [SerializeField]
     private GameObject missilePrefab;
+
+
     protected override void Awake()
     {
         init();
@@ -48,4 +50,9 @@ public class Boss : Enemy
         missileL.transform.position = missilePosL.position;
        
     }
+
+    private void OnDestroy()
+    {
+        CancelInvoke("Attack");
     }
+}

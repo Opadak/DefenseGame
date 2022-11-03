@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour, IfieldObject
     protected virtual void init()
     {
         spriteRender = GetComponentInChildren<SpriteRenderer>();
+
     }
     private void TurnAround()
     {
@@ -61,12 +62,25 @@ public class Enemy : MonoBehaviour, IfieldObject
     {
         if (collision.gameObject.tag == "Player")
         {
-            SpriteRenderer mesh = GetComponentInChildren<SpriteRenderer>();
-            mesh.color = Color.yellow;
+
+            spriteRender.color = Color.yellow;
             
+        }else if(collision.gameObject.tag == "PlayerBullet")
+        {
+            hp--;
+            
+            spriteRender.color = Color.black;
         }
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Shield")
+        {
+            hp--;
 
+            spriteRender.color = Color.black;
+        }
+    }
     protected virtual void OnMouseDown()
     {
         ScoreDelegate scoreDelegate;
@@ -99,7 +113,9 @@ public class Enemy : MonoBehaviour, IfieldObject
        
     }
 
-  
- 
+
+
     #endregion
+
+   
 }

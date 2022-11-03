@@ -10,7 +10,7 @@ public class SpawnManager : Singleton<SpawnManager>
 
     private GameObject[] enemies;
 
-    private float enemySpawnDelay = 7f; // default°ª
+    private float enemySpawnDelay = 5f; // default°ª
     private int score;
     private int maxEnemyKillCount;
     private int curEnemyKillCount;
@@ -22,12 +22,13 @@ public class SpawnManager : Singleton<SpawnManager>
     protected override void Awake()
     {
         base.Awake();
-        StageManager.Instance.stageEvent += StageRecieveEvent;
+
+       
     }
     void Start()
     {
 
-       
+        StageManager.Instance.stageEvent += StageRecieveEvent;
     }
 
     public void EnemySpawn(Vector2 spawnVec, int enemyIndex)
@@ -64,7 +65,7 @@ public class SpawnManager : Singleton<SpawnManager>
         InvokeRepeating("RandomSpawnEnemy", enemySpawnDelay, enemySpawnDelay);
     }
     
-    private void CleanEnemy()
+    public void CleanEnemy()
     {
         if (null == enemyOnField)
             return;
@@ -76,7 +77,6 @@ public class SpawnManager : Singleton<SpawnManager>
 
     private void StageRecieveEvent(int stage, Stage _curStage)
     {
-        Debug.Log(stage);
         enemies = _curStage.revealEnemyType;
         enemySpawnDelay = _curStage.enemySpawnTime;
         maxEnemyKillCount = _curStage.enemyKillCount;
