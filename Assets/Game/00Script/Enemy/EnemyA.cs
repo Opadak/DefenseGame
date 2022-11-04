@@ -37,7 +37,7 @@ public class EnemyA : Enemy
         enemyStatA.Speed = 0.3f;
         enemyStatA.Hp = 0;
         enemyStatA.Point = 1;
-        enemyStatA.DelayMissile = 0.4f;
+        enemyStatA.DelayMissile = 1f;
 
         speed = enemyStatA.Speed;
         hp = enemyStatA.Hp;
@@ -47,7 +47,8 @@ public class EnemyA : Enemy
 
     protected override void Attack()
     {
-        GameObject missile = Instantiate(missilePrefab);
+        GameObject missile = Instantiate(missilePrefab, new Vector3(0, 0, 0), Utils.QI);
+        missile.transform.parent = GameObject.Find("EnemyBulletDummy").transform;
         missile.transform.position = missilePos.position;
         StartCoroutine(AttackCo(1f));
     }
@@ -59,7 +60,7 @@ public class EnemyA : Enemy
     protected override void OnMouseDown()
     {
         
-        //이걸 이벤트 핸들러로 바꾸고 싶음. 
+
         base.OnMouseDown();
 
     }

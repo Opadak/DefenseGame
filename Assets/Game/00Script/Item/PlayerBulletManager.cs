@@ -9,6 +9,8 @@ public class PlayerBulletManager : Item
     
     private Vector3 dirVec3;
 
+    private float Delay; // 차후 추가.. 
+
     private void OnEnable()
     {
         Attack();
@@ -17,15 +19,27 @@ public class PlayerBulletManager : Item
 
     private void Attack()
     {
-        for(int i = 0; i < Level; i++)
+
+        for (int i = 0; i < Level; i++)
         {
-            GameObject gameObj = Instantiate(playerbulletPrefab, Utils.playerPos);
+
+            Debug.Log(i + "i" + Level +"Level");
+            GameObject gameObj = Instantiate(playerbulletPrefab, new Vector3(0, 0, 0), Utils.QI);
+            gameObj.transform.parent = GameObject.Find("BulletDummy").transform;
+            DummyManager.Instance.BulletObj = gameObj;
             PlayerBullet playerbullet = gameObj.GetComponent<PlayerBullet>();
             playerbullet.Count= i;
+ 
+        
         }
-        gameObject.SetActive(false);
+        Invoke("SetActiveMagement", 1f);
     }
 
+
+    private void SetActiveMagement()
+    {
+        gameObject.SetActive(false);
+    }
 
     
 

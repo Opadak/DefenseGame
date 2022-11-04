@@ -6,12 +6,11 @@ using TMPro;
 
 public delegate void ScoreDelegate(int scorePlus);
 
-public class ScoreManager : MonoBehaviour
-{
-    public static ScoreManager Inst { get; set; }
-    void Awake() => Inst = this;
+public class ScoreManager : Singleton<ScoreManager>
+{ 
 
     private static int score;
+
 
     [SerializeField]
     private TextMeshPro scoreTxt;
@@ -29,13 +28,13 @@ public class ScoreManager : MonoBehaviour
         ShowScoreToTextMesh();
     }
 
-    public bool MinusScore(int scoreMinus)
+    public bool CheckScore(int scoreMinus)
     {
         int temp = score;
-        score = score - scoreMinus;
-        if (score < 0)
-        {
-            score = temp;
+        temp = temp - scoreMinus;
+        if (temp <= 0)
+        {            
+            Debug.Log("돈이 없습니다.");
             return false;
         }
         else
@@ -45,6 +44,20 @@ public class ScoreManager : MonoBehaviour
         }
         
     }
+    public void MinusScore(int scoreMinus)
+    {
+        bool isMinus = CheckScore(scoreMinus);
+        if (isMinus)
+        {
+            score = score - scoreMinus;
+            ShowScoreToTextMesh();
+        }
+        else
+        {
+            return;
+        }
+    }
+
     private void ResetScore()
     {
         score = 0;

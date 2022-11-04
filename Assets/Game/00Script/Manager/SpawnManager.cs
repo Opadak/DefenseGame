@@ -43,7 +43,7 @@ public class SpawnManager : Singleton<SpawnManager>
         {
             //Stage Clear
             Reset();
-            StageManager.Instance.StopStage();
+            UIManager.Instance.StopStage();
         }
         else
         {
@@ -72,6 +72,7 @@ public class SpawnManager : Singleton<SpawnManager>
         for (int i = 0; i < enemyOnField.Count; i++)
         {
             Destroy(enemyOnField[i]);
+            enemyOnField.RemoveAt(i);
         }
     }
 

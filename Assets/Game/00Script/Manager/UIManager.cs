@@ -45,7 +45,16 @@ public class UIManager : Singleton<UIManager>
 
     }
 
- 
+    protected override void OnDestroy()
+    {
+        if (checkPlayerStatCo != null)
+        {
+            StopCoroutine(checkPlayerStatCo);
+            checkPlayerStatCo = null;
+        }
+        /*   StatusEventManager.Instance.SendEvent -= StatusEventManager_SendEvent;*/
+
+    }
 
     private void SetUpLevelUp(int level)
     {
@@ -57,11 +66,7 @@ public class UIManager : Singleton<UIManager>
         StatusEventManager.Instance.DispatchEvent(this, StatusType.VERY_GOOD);
     }
 
-    public void LevelUp(int level)
-    {
-        player.Setup(myCastle[level]);
-        UIManager.Instance.SetUpLevelUp(level);
-    }
+
     private void SetupCastleStat()
     {
         myCastle = new List<Castle>();
@@ -134,29 +139,31 @@ public class UIManager : Singleton<UIManager>
     {
         textMesh.text = result.ToString();
     }
-    protected override void OnDestroy()
-    {
-        if (checkPlayerStatCo != null)
-        {
-            StopCoroutine(checkPlayerStatCo);
-            checkPlayerStatCo = null;
-        }
-     /*   StatusEventManager.Instance.SendEvent -= StatusEventManager_SendEvent;*/
-        
-    }
+ 
 
     private void StatusEventManager_SendEvent(StatusType obj, EventArgs e)
     {
         ReceivePlayerStatus(obj);
-
-        Debug.Log(e.GetType());
-
-
     }
     public void NextStage()
     {
         clearPanel.SetActive(false);
+        playingPanel.SetActive(true);
         StageManager.Instance.StartStage();
         ChangeUiText(StageTxt,StageManager.Instance.Stage);
     }
+    public void LevelUp(int level)
+    {
+        player.Setup(myCastle[level]);
+        UIManager.Instance.SetUpLevelUp(level);
+    }
+
+    public void StopStage()
+    {
+        StageManager.Instance.Stage++;
+        clearPanel.SetActive(true);
+        playingPanel.SetActive(false);
+    }
+
+    
 }

@@ -9,16 +9,16 @@ using UnityEngine;
 public class ItemManager : Singleton<ItemManager>
 {
     [SerializeField]
-    private GameObject[] itemObjects; //Shield, PlayerBullet, WideRangeAttack, Boom
+    private GameObject[] itemObjects; //Shield, PlayerBullet, [WideRangeAttack], Boom
     
     private BulletDirType bulletDirType;
 
     private Dictionary<GameObject,int> itemGrade = new Dictionary<GameObject,int>();
     
    protected override void Awake()
-    {
+   {
         Init();
-    }
+   }
 
     void Update()
     {
@@ -29,17 +29,11 @@ public class ItemManager : Singleton<ItemManager>
     {
         for(int i = 0; i < itemObjects.Length; i ++)
         {
-            Debug.Log(itemObjects[i]);
             itemGrade.Add(itemObjects[i], 1);
         }
       
     }
-    public void UseItem(GameObject key)
-    {
-        key.SetActive(true);
-        Item item = key.GetComponent<Item>();
-        item.Level = (int)itemGrade[key];       
-    }
+   
  
     private void UpgradeItem(GameObject key)
     {
@@ -50,7 +44,16 @@ public class ItemManager : Singleton<ItemManager>
 
     public void UpgradeBtn(GameObject key)
     {
+        ScoreManager.Instance.MinusScore(10);
+        //업그레이드 버전 마다 가격 다르게 
         UpgradeItem(key);
 
+    }
+
+    public void UseItem(GameObject key)
+    {
+        key.SetActive(true);
+        Item item = key.GetComponent<Item>();
+        item.Level = (int)itemGrade[key];
     }
 }

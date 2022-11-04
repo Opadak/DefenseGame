@@ -19,6 +19,8 @@ using UnityEngine;
     }
     public void ActiveBoom()
      {
+        int indexList = SpawnManager.Instance.enemyOnField.Count;
+        SpawnManager.Instance.RecieveEnemyKill(indexList);
         SpawnManager.Instance.CleanEnemy();
         SpawnManager.Instance.enemyOnField.Clear();
         gameObject.SetActive(false);

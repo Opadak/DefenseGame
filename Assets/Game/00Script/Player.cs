@@ -80,7 +80,7 @@ public class Player : Singleton<Player>,IfieldObject
         {
 
             Hp = Hp - 1;
-            if (Hp <= 0 &&UIManager.Instance._hp >0)
+            if (Hp <= 0 && UIManager.Instance._hp >0)
                 return;
             status = CheckHpState();
             if(statusType != status)

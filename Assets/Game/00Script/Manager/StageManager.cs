@@ -8,6 +8,7 @@ public class StageManager : Singleton<StageManager>
 { 
     [SerializeField]
     StageSO stageSO;
+
     private List<Stage> mystages;
 
 
@@ -53,13 +54,6 @@ public class StageManager : Singleton<StageManager>
            
         }
     }
-
-    public void StopStage()
-    {
-        Stage++;
-        UIManager.Instance.clearPanel.SetActive(true);
-    }
-
 
     protected override void OnDestroy()
     {

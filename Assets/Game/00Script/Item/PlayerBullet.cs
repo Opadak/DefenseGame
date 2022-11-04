@@ -7,10 +7,25 @@ public class PlayerBullet : Missile
 
     private Vector3 dirVec3;
 
-    private int count;
-    public int Count { private get;  set; }
+    public int count;
+    public int Count
+    {
+        protected get => count;
 
-    private void Awake()
+        set
+        {
+            if (value >= 3)
+            {
+                count = 3;
+               
+            }
+            else
+            {
+                count = value;
+            }
+        }
+    }
+    protected override void Start()
     {
         base.Start();
         Init();
@@ -20,24 +35,25 @@ public class PlayerBullet : Missile
     protected override void Update()
     {
         base.Update();
+      
     }
 
     private void Init()
     {
-        var dirType = (BulletDirType)Count;
-        switch (dirType)
+       
+        switch (Count)
         {
-            case BulletDirType.RIGHT:
-                dirVec3 = Vector3.right;
-                break;
-            case BulletDirType.LEFT:
-                dirVec3 = Vector3.left;
-                break;
-            case BulletDirType.UP:
+            case 0:
                 dirVec3 = Vector3.up;
                 break;
-            case BulletDirType.DOWN:
+            case 1:
                 dirVec3 = Vector3.down;
+                break;
+            case 2:
+                dirVec3 = Vector3.right;
+                break;
+            case 3:     
+                dirVec3 = Vector3.left;
                 break;
         }
     }

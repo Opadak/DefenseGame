@@ -84,7 +84,7 @@ public class Enemy : MonoBehaviour, IfieldObject
     protected virtual void OnMouseDown()
     {
         ScoreDelegate scoreDelegate;
-        scoreDelegate = new ScoreDelegate(ScoreManager.Inst.PlusScore);
+        scoreDelegate = new ScoreDelegate(ScoreManager.Instance.PlusScore);
         scoreDelegate(point);
         /*   ScoreManager.Instance.PlusScore(point);*/
         ChangeSpriteRenderer(spriteRender, Color.black);

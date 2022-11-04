@@ -6,7 +6,27 @@ using UnityEngine;
 
     public class Shield : Item
     {
-        protected override void Start()
+    private int count;
+
+    public int Count
+    {
+        protected get => count;
+
+        set
+        {
+            if (value <= 0)
+            {
+                count = 0;
+                Debug.Log("");
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                count = value;
+            }
+        }
+    }
+    protected override void Start()
         {
             base.Start();
           

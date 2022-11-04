@@ -23,7 +23,7 @@ public class Practice : MonoBehaviour, ISecondPrartice
 
     public void Car(int index)
     {
-
+        //왜 이걸 삭제를 하면 오류가 나는건지 
     }
 
     //이러면 결국 오버로딩 아닌가..?
